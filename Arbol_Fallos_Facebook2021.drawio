@@ -1,5 +1,5 @@
 <mxfile host="app.diagrams.net" pages="1">
-  <diagram id="fta-1_estructura" name="1_estructura">
+  <diagram id="fta-meta-2021" name="FTA Meta 4-oct-2021 (fase 2/4)">
     <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" landscape="1" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0" />
@@ -46,9 +46,37 @@
         <mxCell id="x5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="e2" target="g5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="a" value="&lt;b&gt;RAMA A — Backbone&lt;/b&gt;&lt;br&gt;Desconexión total de la red troncal: centros de datos aislados entre sí y de Internet" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="460" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="tout" value="&lt;b&gt;T1&lt;/b&gt;" style="triangle;direction=north;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;verticalAlign=bottom;spacingBottom=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="470" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="&lt;b&gt;AND&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="155" y="590" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="be1" value="&lt;b&gt;BE1 · Error operacional&lt;/b&gt;&lt;br&gt;Comando de mantenimiento (evaluar capacidad del backbone) desconecta todos sus enlaces" style="ellipse;aspect=fixed;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;spacing=14;" vertex="1" parent="1">
+          <mxGeometry x="20" y="690" width="170" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="be2" value="&lt;b&gt;BE2 · Fallo de auditoría&lt;/b&gt;&lt;br&gt;Bug en la herramienta de auditoría: no bloqueó el comando" style="ellipse;aspect=fixed;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;spacing=14;" vertex="1" parent="1">
+          <mxGeometry x="230" y="690" width="170" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="x6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="g1" target="a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a" target="tout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="a" target="g2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="g2" target="be1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="g2" target="be2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
 </mxfile>
-
-

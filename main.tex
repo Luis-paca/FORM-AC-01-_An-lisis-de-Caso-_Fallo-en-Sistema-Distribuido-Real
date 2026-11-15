@@ -45,6 +45,15 @@ ZAMBRANO RONQUILLO HEINER ARIEL}\\[3cm]
 
 % =================== PÁGINAS 2 Y 3: DESARROLLO TÉCNICO ===================
 \twocolumn
+\begin{figure*}[t]
+\centering
+\IfFileExists{arbol_fallos_facebook2021.pdf}{%
+  \includegraphics[width=\textwidth,height=11cm,keepaspectratio]{arbol_fallos_facebook2021.pdf}}{%
+\IfFileExists{arbol_fallos_facebook2021.png}{%
+  \includegraphics[width=\textwidth,height=11cm,keepaspectratio]{arbol_fallos_facebook2021.png}}{%
+  \fbox{\parbox[c][10cm][c]{0.9\textwidth}{\centering\ttfamily [PLACEHOLDER] Exportar el .drawio como PDF y guardarlo como arbol\_fallos\_facebook2021.pdf junto a este .tex}}}}
+\caption{Árbol de Fallos (FTA) del \textit{outage} de Meta del 4 de octubre de 2021. Elaboración propia a partir de~\cite{janardhan2021outage}.}\label{fig:fta}
+\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%% FASE 1: Incidente y línea de tiempo %%%%%%%%%%%%%%%%%%%%
 \section{Descripción del incidente y línea de tiempo}
@@ -66,6 +75,36 @@ $\approx$21:00 & Reaparece actividad BGP de Facebook (pico a las 21:17).\\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+%%%%%%%%%%%%%%%%%%%% FASE 2: Causas raíz e impacto %%%%%%%%%%%%%%%%%%%%
+\section{Análisis de causas raíz}
+El Árbol de Fallos (Fig.~\ref{fig:fta}) se lee de arriba abajo: el evento tope (caída global de $\approx$6\,h) exige que coincidan un fallo sistémico (E1) y una recuperación prolongada (E2).
+
+\paragraph{Rama A: backbone.} En un mantenimiento rutinario, un comando pensado para evaluar la capacidad de la red troncal desconectó todos sus enlaces (BE1); la herramienta de auditoría, que normalmente bloquea comandos así, tenía un \textit{bug} que impidió detenerlo (BE2)~\cite{janardhan2021outage}.
+
+\paragraph{Rama B: DNS/BGP.} Sin backbone, los sitios DNS no alcanzaban los centros de datos y, por diseño (H1), retiraron sus anuncios BGP: los servidores seguían encendidos pero inalcanzables. Como el DNS autoritativo estaba íntegramente en el AS32934 de Facebook (H2), Internet no pudo resolver sus dominios~\cite{janardhan2021outage,cloudflare2021facebook}. Los reintentos de los resolvers multiplicaron la carga: 1.1.1.1 recibió 30$\times$ más consultas~\cite{cloudflare2021facebook} y el tráfico hacia servidores \texttt{.COM/.NET} pasó de $\approx$7\,000 a $\approx$900\,000 consultas/s~\cite{rfc9520}.
+
+\paragraph{Rama C: recuperación.} Las herramientas de gestión, el DNS interno y el acceso OOB dependían del mismo backbone (BE3), así que nadie pudo revertir el cambio en remoto; el acceso físico fue lento por las medidas de seguridad~\cite{janardhan2021outage}. Un error puntual se convirtió en $\approx$6\,h de caída.
+
+Es un fallo de modo común: una redundancia aparente (varios sitios DNS) compartía un mismo dominio de fallo. La concentración de la infraestructura DNS se ha medido empíricamente~\cite{xu2023centrality}, y estudios recientes sobre la fragilidad de las redes IP~\cite{owen2025failures}, los fallos en cascada~\cite{zheng2026tolerance} y la detección de anomalías BGP~\cite{wu2025glbad,latifmartinez2025bgp} tratan incidentes de este tipo.
+
+\section{Impacto cuantificado}
+\begin{table}[h]
+\centering\footnotesize
+\caption{Impacto del incidente.}\label{tab:impacto}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
+\toprule
+\textbf{Indicador} & \textbf{Valor}\\\midrule
+Usuarios en riesgo & $\approx$3\,500 millones de usuarios de las plataformas de Meta\nota\\
+Indisponibilidad del DNS & $\approx$5\,h 48\,min (15:40--21:28 UTC)~\cite{cloudflare2021facebook}\\
+Ingresos publicitarios & $\approx$USD 545\,000/h solo en EE.\,UU.\nota; $\approx$USD 100\,M globales (estimación: ingreso medio por hora $\times$ duración)\nota\\
+Bolsa & Acción $-4{,}9\,\%$ el 4-oct\nota; coincidió con otras noticias adversas, no es atribuible solo a la caída\\
+Disponibilidad mensual & $1-5{,}8/720\approx 99{,}19\,\%$ (cálculo propio)\\
+\bottomrule
+\end{tabularx}
+{\scriptsize\nota\ Cifras de prensa económica (Reuters, Fortune); no forman parte de las referencias académicas verificadas.}
+\end{table}
+Las fuentes verificadas no mencionan un SLA contractual. Como referencia usamos el 99,5\,\% de nuestro PFC (presupuesto de 3,6\,h/mes): un 99,19\,\% lo incumple.
 
 % ======================= PÁGINA 4: REFERENCIAS =======================
 \newpage

@@ -106,6 +106,29 @@ Disponibilidad mensual & $1-5{,}8/720\approx 99{,}19\,\%$ (cálculo propio)\\
 \end{table}
 Las fuentes verificadas no mencionan un SLA contractual. Como referencia usamos el 99,5\,\% de nuestro PFC (presupuesto de 3,6\,h/mes): un 99,19\,\% lo incumple.
 
+%%%%%%%%%%%%%%%%%%%% FASE 3: Unidad 1 y mitigación %%%%%%%%%%%%%%%%%%%%
+\section{Relación con la Unidad 1}
+\paragraph{Transparencia de distribución.} Se rompió la de \textit{acceso} (los clientes no pudieron resolver nombres), la de \textit{ubicación} (DNS/BGP es el mecanismo que mapea nombre a dirección alcanzable) y la de \textit{fallos}: las réplicas seguían vivas pero la falla no se enmascaró, y ni siquiera los empleados pudieron alcanzarlas.
+
+\paragraph{Teorema CAP (analogía).} La retirada de BGP produjo una partición total ($P$) entre los clientes y los centros de datos. Ante $P$ hay que elegir: Meta quedó sin disponibilidad ($A$) y sin consistencia observable ($C$), porque ninguna lectura ni escritura llegó a servirse. Internamente, los planos de control quedaron aislados del backbone y entre sí. CAP se refiere a datos replicados, por lo que aquí es solo una analogía.
+
+\paragraph{Mecanismo de tolerancia que falló.} El \textit{health-check} que retira el anuncio BGP al perder los centros de datos sirve ante un fallo parcial, pero con el backbone caído declaró ``enfermos'' a todos los sitios DNS a la vez~\cite{janardhan2021outage}. Faltaron aislamiento de fallos (\textit{bulkheads}) y un acceso OOB independiente de la red que se intenta reparar.
+
+\section{Mitigación aplicada}
+\begin{table}[h]
+\centering\footnotesize
+\caption{Medidas inmediatas y estructurales.}\label{tab:mitiga}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
+\toprule
+\textbf{Tipo} & \textbf{Medida}\\\midrule
+Inmediata & Acceso físico de emergencia a los centros de datos y restauración manual del backbone~\cite{janardhan2021outage}.\\
+Inmediata & Reposición gradual de carga, BGP y DNS para evitar picos de tráfico y de consumo eléctrico (decenas de MW), apoyada en los simulacros \textit{storm}~\cite{janardhan2021outage}.\\
+Estructural (declarada) & Revisión amplia de resiliencia, nuevos escenarios de \textit{storm} que simulen la caída global del backbone y más pruebas~\cite{janardhan2021outage}.\\
+Estructural (propuesta del equipo) & Auditor/simulador de comandos de red con validación independiente, herramientas internas desacopladas del backbone y acceso OOB resiliente. Meta no los confirma en sus publicaciones.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 % ======================= PÁGINA 4: REFERENCIAS =======================
 \newpage
 \onecolumn

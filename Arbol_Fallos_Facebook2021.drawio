@@ -1,5 +1,5 @@
 <mxfile host="app.diagrams.net" pages="1">
-  <diagram id="fta-meta-2021" name="FTA Meta 4-oct-2021 (fase 3/4)">
+  <diagram id="fta-meta-2021" name="FTA Meta 4-oct-2021 (fase 4/4)">
     <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" landscape="1" math="0" shadow="0" background="#FFFFFF">
       <root>
         <mxCell id="0" />
@@ -116,6 +116,36 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="x19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="g4" target="h1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c12" value="Sin acceso remoto ni out-of-band (OOB): las herramientas internas de gestión dependían del backbone y del DNS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="460" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="&lt;b&gt;No desarrollado&lt;/b&gt;&lt;br&gt;Acceso in situ lento por la seguridad física y lógica de los DCs" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;spacingLeft=30;spacingRight=30;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="460" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="g6" value="&lt;b&gt;AND&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1145" y="590" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t1c" value="&lt;b&gt;T1&lt;/b&gt;" style="triangle;direction=north;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;verticalAlign=bottom;spacingBottom=2;" vertex="1" parent="1">
+          <mxGeometry x="1052" y="700" width="55" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="be3" value="&lt;b&gt;BE3 · Acoplamiento crítico&lt;/b&gt;&lt;br&gt;Gestión, DNS interno, OOB y seguridad dependen del mismo backbone" style="ellipse;aspect=fixed;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;spacing=14;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="690" width="170" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="x8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="g5" target="c12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="g5" target="c3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="c12" target="g6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="g6" target="t1c">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=none;strokeColor=#000000;strokeWidth=1.2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="g6" target="be3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

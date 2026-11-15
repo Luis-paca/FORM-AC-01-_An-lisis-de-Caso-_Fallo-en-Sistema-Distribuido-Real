@@ -129,6 +129,26 @@ Estructural (propuesta del equipo) & Auditor/simulador de comandos de red con va
 \end{tabularx}
 \end{table}
 
+%%%%%%%%%%%%%%%%%%%% FASE 4: Lecciones para el PFC e IA %%%%%%%%%%%%%%%%%%%%
+\section{Lecciones aprendidas para el PFC}
+Nuestro PFC, la plataforma \textit{Bolsa de Empleos para Graduados} de la UTEQ (vacantes validadas por un administrador, importación periódica por \textit{web scraping}, postulaciones, notificaciones por correo, 2FA y disponibilidad mínima del 99,5\,\%), comparte patrones de riesgo con el caso. Otro apagón nacional de red~\cite{gregory2023optus} muestra que el patrón no es exclusivo de Meta. Medidas a incorporar en \texttt{TA-PFC-E1}:
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Riesgos del PFC y medidas preventivas.}\label{tab:pfc}
+\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{4.3cm} X@{}}
+\toprule
+\textbf{Riesgo} & \textbf{Medida preventiva}\\\midrule
+\textbf{R1. Acoplamiento con \textit{scraping}.} Si los portales externos fallan o cambian de estructura, la importación bloquea el hilo principal o la base de datos y el fallo se propaga en cascada. & Procesamiento asíncrono con colas de tareas aisladas, \textit{timeouts} estrictos y patrón \textit{Circuit Breaker}.\\\addlinespace
+\textbf{R2. Dependencia circular 2FA/correo.} Si el SMTP externo se satura o cae, usuarios y administradores no pueden iniciar sesión ni validar ofertas (como el bloqueo interno de Meta). & Envío de correos desacoplado con reintentos exponenciales (\textit{exponential backoff}) y método de respaldo \textit{out-of-band} para la autenticación administrativa.\\\addlinespace
+\textbf{R3. Punto único de fallo en el despliegue.} Un cambio de configuración erróneo en producción tumba el 99,5\,\% exigido sin \textit{rollback} inmediato. & Entorno de \textit{staging} con validación automatizada previa (CI/CD), \textit{health-checks} independientes y \textit{rollback} automático.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Declaración de uso de Inteligencia Artificial}
+Se empleó asistencia de IA (Claude / Gemini) exclusivamente para la estructuración en \LaTeX, el apoyo en el diseño inicial del diagrama y la redacción técnica. Todas las fuentes, enlaces URL y códigos DOI fueron auditados y verificados manualmente por los integrantes del equipo.
+
 % ======================= PÁGINA 4: REFERENCIAS =======================
 \newpage
 \onecolumn

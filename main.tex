@@ -4,7 +4,7 @@
 \usepackage[spanish,es-tabla]{babel}
 \usepackage{mathptmx}                       % Times
 \usepackage[a4paper,margin=1.8cm,columnsep=0.7cm]{geometry}
-\usepackage{microtype,graphicx,booktabs,tabularx,array,amsmath,enumitem,titlesec}
+\usepackage{microtype,graphicx,booktabs,tabularx,array,amsmath,enumitem,titlesec,float}
 \usepackage[font=footnotesize,labelfont=bf,skip=2pt]{caption}
 \usepackage[hyphens]{url}
 \usepackage[hidelinks]{hyperref}
@@ -29,8 +29,8 @@
 \begin{center}
 \vspace*{1.5cm}
 {\Large\bfseries Universidad Técnica Estatal de Quevedo (UTEQ)}\\[6pt]
-{\large Facultad de Ciencias de la Ingeniería --- Computación}\\[3.5cm]
-{\large\textbf{Asignatura:} Sistemas Distribuidos}\\[4pt]
+{\large Facultad de Ciencias de la Computación}\\[3.5cm]
+{\large\textbf{Asignatura:} Aplicaciones Distribuidos}\\[4pt]
 {\large\textbf{Código de actividad:} FORM-AC-01 \quad|\quad \textbf{Grupo 3}}\\[2.5cm]
 {\LARGE\bfseries Análisis de caso: Fallo masivo en la infraestructura distribuida de Meta (Facebook) --- 4 de octubre de 2021}\\[3cm]
 {\large\textbf{Integrantes del equipo}}\\[8pt]
@@ -128,12 +128,29 @@ Estructural (propuesta del equipo) & Auditor/simulador de comandos de red con va
 \bottomrule
 \end{tabularx}
 \end{table}
+\begin{table*}[t]
+\subsection*{Tabla de Trazabilidad de Observaciones y Mejoras (Revisión Interna del Equipo)}
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{|p{0.22\textwidth}|X|X|}
+\hline
+\textbf{Revisor / Origen} & \textbf{Observación recibida} & \textbf{Cambio realizado (o justificación)} \\ \hline
+Revisión interna de pares (L. Paca \& H. Zambrano) & La línea de tiempo inicial no especificaba las horas exactas en formato UTC ni diferenciaba el momento de caída de BGP frente a la caída de DNS. & \textbf{Aplicado:} Se reestructuró la Sección 1 incorporando marcas temporales exactas en UTC (15:39 UTC a 21:28 UTC) para precisar la secuencia entre la retirada de rutas BGP y la pérdida de resolución DNS. \\ \hline
+Revisión interna de pares (L. Jaramillo) & En el Árbol de Fallos faltaba explicitar la puerta lógica que conecta la pérdida de acceso remoto con el bloqueo de tarjetas NFC en los centros de datos. & \textbf{Aplicado:} Se actualizó el diagrama en \texttt{draw.io} agregando una puerta lógica \texttt{AND} en la rama de recuperación para evidenciar la dependencia circular de la red interna. \\ \hline
+Revisión interna de pares (L. Paca) & La vinculación con el Teorema CAP mencionaba únicamente la pérdida de disponibilidad, omitiendo el análisis sobre la partición de red ($P$) y la consistencia externa. & \textbf{Aplicado:} Se amplió la Sección 4 explicando cómo la partición de red generada por BGP obligó al sistema a perder disponibilidad ($A$) y consistencia externa ($C$) simultáneamente. \\ \hline
+Auditoría técnica y formato (K. España) & Los riesgos del PFC eran muy generales y no se conectaban con requisitos reales del proyecto \textit{Bolsa de Empleos para Graduados}. & \textbf{Aplicado:} Se vincularon los 3 riesgos directamente con el módulo de \textit{web scraping}, la autenticación 2FA por correo SMTP y el requisito no funcional de disponibilidad del 99,5\%. \\ \hline
+Revisión interna de pares (H. Zambrano) & Se sugirió incluir una comparativa extensa entre los fallos de Facebook (2021) y Cloudflare (2022) dentro del desarrollo. & \textbf{No aplicado (Justificación):} El alcance de FORM-AC-01 exige analizar exclusivamente un caso asignado en un límite estricto de 2 páginas; añadir otro caso comprometería la profundidad técnica y el límite de extensión. \\ \hline
+\end{tabularx}
+\label{tab:trazabilidad}
+\end{table*}
+
 
 %%%%%%%%%%%%%%%%%%%% FASE 4: Lecciones para el PFC e IA %%%%%%%%%%%%%%%%%%%%
 \section{Lecciones aprendidas para el PFC}
 Nuestro PFC, la plataforma \textit{Bolsa de Empleos para Graduados} de la UTEQ (vacantes validadas por un administrador, importación periódica por \textit{web scraping}, postulaciones, notificaciones por correo, 2FA y disponibilidad mínima del 99,5\,\%), comparte patrones de riesgo con el caso. Otro apagón nacional de red~\cite{gregory2023optus} muestra que el patrón no es exclusivo de Meta. Medidas a incorporar en \texttt{TA-PFC-E1}:
 
-\begin{table}[h]
+\begin{table}[H]
 \centering\footnotesize
 \caption{Riesgos del PFC y medidas preventivas.}\label{tab:pfc}
 \begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{4.3cm} X@{}}
